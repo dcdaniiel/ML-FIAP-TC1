@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="ML-FIAP-TC1 - Pipeline Preditivo de Churn" width="100%">
+</p>
+
 # ML-FIAP-TC1 - Pipeline Preditivo de Churn
 
 Tech Challenge da Fase 1 da Pós Tech em Machine Learning Engineering (FIAP, turma 13MLET).

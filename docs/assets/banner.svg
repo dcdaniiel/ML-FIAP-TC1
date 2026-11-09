@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-labelledby="t d">
+  <title id="t">ML-FIAP-TC1 - Pipeline Preditivo de Churn</title>
+  <desc id="d">Capa do repositório: pipeline de churn com Scikit-Learn servido por FastAPI. Tech Challenge Fase 1, FIAP Pós Tech MLET.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1f"/>
+      <stop offset="1" stop-color="#101a36"/>
+    </linearGradient>
+    <linearGradient id="curve" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+    <clipPath id="plot"><rect x="760" y="60" width="440" height="280"/></clipPath>
+    <clipPath id="card"><rect width="1280" height="400" rx="20"/></clipPath>
+  </defs>
+
+  <!-- fundo -->
+  <rect width="1280" height="400" rx="20" fill="url(#bg)"/>
+  <rect width="1280" height="400" rx="20" fill="url(#grid)"/>
+  <circle cx="980" cy="200" r="260" fill="url(#glow)" clip-path="url(#card)"/>
+  <rect x="0.5" y="0.5" width="1279" height="399" rx="20" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <!-- texto -->
+  <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="72" y="92" font-size="14" font-weight="600" letter-spacing="3" fill="#2dd4bf">FIAP PÓS TECH · MLET · TECH CHALLENGE FASE 1</text>
+    <text x="72" y="172" font-size="64" font-weight="800" letter-spacing="-1.5" fill="#f5f7ff">ML-FIAP-TC1</text>
+    <text x="72" y="218" font-size="30" font-weight="500" fill="#c7cde3">Pipeline Preditivo de Churn</text>
+    <text x="72" y="262" font-size="17" fill="#8a93b4">Da análise exploratória ao modelo servido via API, para uma operadora de telecom.</text>
+
+    <!-- chips de stack -->
+    <g font-size="14" font-weight="600" fill="#e6e9f5">
+      <rect x="72" y="298" width="118" height="34" rx="17" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="131" y="320" text-anchor="middle">Scikit-Learn</text>
+      <rect x="200" y="298" width="90" height="34" rx="17" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="245" y="320" text-anchor="middle">FastAPI</text>
+      <rect x="300" y="298" width="82" height="34" rx="17" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="341" y="320" text-anchor="middle">Pytest</text>
+      <rect x="392" y="298" width="128" height="34" rx="17" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="456" y="320" text-anchor="middle">Python 3.12 · uv</text>
+    </g>
+  </g>
+
+  <!-- gráfico: curva ROC estilizada -->
+  <g clip-path="url(#plot)">
+    <!-- eixos -->
+    <path d="M790 320H1180M790 320V90" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5"/>
+    <!-- diagonal do acaso -->
+    <path d="M790 320L1180 90" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" stroke-dasharray="6 7"/>
+    <!-- área sob a curva -->
+    <path d="M790 320C840 170 900 120 1000 104C1080 92 1140 90 1180 90V320Z" fill="url(#fill)"/>
+    <!-- curva -->
+    <path d="M790 320C840 170 900 120 1000 104C1080 92 1140 90 1180 90" fill="none" stroke="url(#curve)" stroke-width="4" stroke-linecap="round"/>
+    <!-- pontos de operação -->
+    <circle cx="860" cy="178" r="6" fill="#0a0f1f" stroke="#f59e0b" stroke-width="3"/>
+    <circle cx="1000" cy="104" r="7" fill="#2dd4bf"/>
+    <circle cx="1000" cy="104" r="14" fill="none" stroke="#2dd4bf" stroke-opacity="0.45" stroke-width="2"/>
+    <!-- rótulos -->
+    <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#8a93b4">
+      <text x="1180" y="340" text-anchor="end">taxa de falsos positivos</text>
+      <text x="784" y="90" transform="rotate(-90 784 90)" text-anchor="end">taxa de verdadeiros positivos</text>
+    </g>
+    <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#2dd4bf">
+      <text x="1000" y="80" text-anchor="middle">modelo campeão</text>
+    </g>
+    <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#f59e0b">
+      <text x="876" y="172">baseline</text>
+    </g>
+  </g>
+
+  <!-- rodapé do gráfico -->
+  <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2" fill="#5f6889">
+    <text x="1180" y="372" text-anchor="end">LOGÍSTICA · RANDOM FOREST · MLP</text>
+  </g>
+</svg>
