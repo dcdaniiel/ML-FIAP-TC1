@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Hook commit-msg: valida a mensagem conforme CONTRIBUTING.md (Conventional Commits).
+# Ative com: git config core.hooksPath .githooks
+set -u
+
+# Conta caracteres, não bytes, em títulos com acentos.
+if locale -a 2>/dev/null | grep -qx "C.UTF-8"; then export LC_ALL=C.UTF-8; else export LC_ALL=en_US.UTF-8; fi
+
+file="$1"
+# Remove as linhas de comentário vindas do template.
+content="$(grep -v '^#' "$file")"
+title="$(printf '%s\n' "$content" | sed -n '1p')"
+second="$(printf '%s\n' "$content" | sed -n '2p')"
+
+# Mensagens geradas pelo próprio git passam direto.
+case "$title" in
+  "Merge "*|"Revert "*|"fixup! "*|"squash! "*) exit 0 ;;
+esac
+
+types="feat|fix|docs|style|refactor|test|chore|perf|ci"
+pattern="^(${types})(\([a-z0-9._/-]+\))?!?: [^ ].*$"
+
+fail() {
+  printf '\n\342\234\226 commit rejeitado: %s\n' "$1" >&2
+  printf '  título: "%s"\n' "$title" >&2
+  printf '  formato: <tipo>[escopo]: <descrição>   (veja CONTRIBUTING.md)\n\n' >&2
+  exit 1
+}
+warn() { printf '\342\232\240 aviso: %s\n' "$1" >&2; }
+
+[ -z "$title" ] && fail "mensagem vazia"
+
+printf '%s' "$title" | grep -Eq "$pattern" \
+  || fail "título fora do padrão; tipos aceitos: ${types//|/, }"
+
+len=${#title}
+[ "$len" -le 72 ] || fail "título com ${len} caracteres; máximo 72 (ideal até 50)"
+[ "$len" -le 50 ] || warn "título com ${len} caracteres; o ideal é até 50"
+
+printf '%s' "$title" | grep -Eq '\.$' && fail "título não deve terminar com ponto final"
+
+desc="${title#*: }"
+first_word="${desc%% *}"
+printf '%s' "$first_word" | grep -Eq '^[A-ZÁÉÍÓÚÂÊÔÃÕÇ]' \
+  && fail "descrição deve começar em minúscula"
+
+[ -n "$second" ] && fail "deixe uma linha em branco entre o título e o corpo"
+
+# Heurística de modo imperativo: só avisa.
+printf '%s' "$first_word" | grep -Eiq \
+  '^(corrigid[oa]|adicionad[oa]|criad[oa]|removid[oa]|atualizad[oa]|alterad[oa]|ajustad[oa]|implementad[oa]|corre[çc][ãa]o|adi[çc][ãa]o|cria[çc][ãa]o|remo[çc][ãa]o|atualiza[çc][ãa]o|ajustes?|added|fixed|updated|removed|created|changed)$' \
+  && warn "use o modo imperativo: 'corrige', 'adiciona', 'remove' (\"se eu aplicar, ele vai...\")"
+
+# Linhas do corpo acima de 72 colunas: só avisa.
+while IFS= read -r line; do
+  if [ "${#line}" -gt 72 ]; then
+    warn "há linhas do corpo com mais de 72 caracteres"
+    break
+  fi
+done < <(printf '%s\n' "$content" | tail -n +3)
+
+exit 0

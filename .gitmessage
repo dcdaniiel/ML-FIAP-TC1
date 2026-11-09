@@ -1,0 +1,10 @@
+
+# <tipo>[escopo opcional]: <descrição no imperativo, minúscula, sem ponto, até 50 chars>
+#
+# [corpo opcional: explique o PORQUÊ da mudança, linhas de até 72 colunas]
+#
+# [rodapé opcional: BREAKING CHANGE: ..., Refs #12, Co-authored-by: Nome <email>]
+#
+# Tipos:   feat fix docs style refactor test chore perf ci
+# Escopos: data features train predict api tests notebooks docs deps config
+# Guia completo em CONTRIBUTING.md
